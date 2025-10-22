@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Aliya üçün❤️</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #1b1b2f, #4a2b6b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .card {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(6px);
+    animation: fadeIn 1.4s ease;
+  }
+
+  h1 {
+    margin: 0 0 20px;
+    font-size: 26px;
+    color: #ff8fab;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  button {
+    background: linear-gradient(90deg, #ff6b6b, #ff9a9e);
+    border: none;
+    color: white;
+    padding: 14px 22px;
+    font-size: 17px;
+    border-radius: 999px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Aliya üçün 💖</h1>
+    <div id="text" class="hidden">
+      <p>Балам с годовщиной нас 💞  
+23.10.2023 мы познакомились, и я помню до сих пор этот взгляд.  
+С того дня прошло уже 2 года.  
+Я люблю тебя очень сильно, спасибо Аллаху за то, что мы есть друг у друга.  
+
+Я влюбился в твои хамелеон глаза,  
+в твою улыбку, в твой смех, в твою доброту...  
+Я очень люблю тебя, Алиям ❤️</p>
+    </div>
+    <button id="show">Aç 🩷</button>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    const btn = document.getElementById("show");
+    const text = document.getElementById("text");
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let confetti = [];
+
+    btn.addEventListener("click", () => {
+      btn.style.display = "none";
+      text.classList.remove("hidden");
+      startConfetti();
+    });
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function startConfetti() {
+      confetti = Array.from({ length: 150 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 2,
+        c: `hsl(${Math.random() * 360}, 70%, 60%)`,
+        vy: Math.random() * 3 + 2,
+        vx: Math.random() * 2 - 1
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let p of confetti) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.c;
+          ctx.fill();
+          p.y += p.vy;
+          p.x += p.vx;
+          if (p.y > canvas.height) p.y = -10;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+  </script>
+</body>
+</html>
